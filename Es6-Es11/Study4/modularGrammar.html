@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块化语法</title>
+</head>
+<body>
+    <script type="module">
+        // 引入js模块内容
+        // 1.通用导入方式
+        import * as modularOne from "./modularOne.js"
+        console.log(modularOne);
+
+        // 2.解构赋值形式
+        // 当两个变量重名时可以用别名
+        import {date, outdate} from "./modularTwo.js"
+        import {date as today, k} from "./modularThree.js"
+        console.log(today);
+
+        import {default as m} from "./modularFour.js"
+        console.log(m);
+
+        // 3.简便形式，针对默认暴露
+        import dp from "./modularFour.js"
+        console.log(dp);
+    </script>
+</body>
+</html>

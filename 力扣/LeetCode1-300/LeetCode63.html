@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>63. 不同路径 II</title>
+</head>
+
+<body>
+    <div>
+        <h1><a href="https://leetcode-cn.com/problems/unique-paths-ii/">63. 不同路径 II</a></h1>
+        一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
+        机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。
+        现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？<br>
+        <img src="../image/62.robot_maze.png" alt=""> <br>
+        网格中的障碍物和空位置分别用 1 和 0 来表示。
+        <hr>
+        <div style="float: left; height: 450px; width: 50%;">
+            示例 1： <br>
+            <img src="../image/63.robot1.jpg" alt=""> <br>
+            输入：obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]] <br>
+            输出：2 <br>
+            解释： <br>
+            3x3 网格的正中间有一个障碍物。 <br>
+            从左上角到右下角一共有 2 条不同的路径： <br>
+            1. 向右 -> 向右 -> 向下 -> 向下 <br>
+            2. 向下 -> 向下 -> 向右 -> 向右
+        </div>
+        <div style="float: left; height: 450px; width: 49%;">
+            示例 2：<br>
+            <img src="../image/63.robot2.jpg" alt=""> <br>
+            输入：obstacleGrid = [[0,1],[0,0]] <br>
+            输出：1
+            <hr>
+            提示： <br>
+            m == obstacleGrid.length <br>
+            n == obstacleGrid[i].length <br>
+            <!-- 1 <= m, n <= 100 -->
+            obstacleGrid[i][j] 为 0 或 1
+        </div>
+        <br>
+        <h2>思路</h2>
+        <img src="../image/63.动态规划转移方程.png" style="width: 60%;" alt="">
+        <br>
+        <h3>需要注意的边界条件</h3>
+        <p>1.第一个或者最后一个有障碍物</p>
+        <p>2.如果第一行或者第一列有一个障碍物后续都是为-1不可走</p>
+    </div>
+    <script>
+        var uniquePathsWithObstacles = function (obstacleGrid) {
+            let tempArray = obstacleGrid;
+            let rowlength = tempArray.length; //行
+            let collength = tempArray[0].length; //列
+            let res;
+            // 对单行或者单列情况进行判断，只要中间有一个有障碍物结果为0，否则为1
+            if (rowlength === 1 || collength === 1) {
+                let bool = false;
+                for (let i = 0; i < rowlength; i++) {
+                    for (let j = 0; j < collength; j++) {
+                        if (tempArray[i][j] === 1) {
+                            bool = true;
+                            break;
+                        }
+                    }
+                }
+                if (bool) {
+                    console.log(0);
+                    return;
+                } else {
+                    console.log(1);
+                    return;
+                }
+            }
+            // 对起始和结尾进行判断，有一个有障碍物则结果直接返回0
+            if (tempArray[rowlength - 1][collength - 1] === 1 || tempArray[0][0] === 1) {
+                console.log(0);
+                return;
+            }
+
+            // 怕对结果会产生影响，数组中的障碍物1全部变为-1
+            // i为行数，j为列数
+            for (let i = 0; i < rowlength; i++) {
+                for (let j = 0; j < collength; j++) {
+                    if (tempArray[i][j] === 1) {
+                        tempArray[i][j] = -1;
+                    }
+                }
+            }
+            // 对第一行和第一列的数据进行初始化，有一个障碍物后面全部为-1
+            let rowTemp = 1;
+            for (let j = 0; j < collength; j++) {
+                if (tempArray[0][j] === -1) {
+                    rowTemp = -1;
+                    tempArray[0][j] = rowTemp;
+                } else {
+                    tempArray[0][j] = rowTemp;
+                }
+            }
+            let colTemp = 1;
+            for (let i = 0; i < rowlength; i++) {
+                if (tempArray[i][0] === -1) {
+                    colTemp = -1;
+                    tempArray[i][0] = colTemp;
+                } else {
+                    tempArray[i][0] = colTemp;
+                }
+            }
+
+            for (let i = 1; i < rowlength; i++) {
+                for (let j = 1; j < collength; j++) {
+                    if (tempArray[i][j] !== -1) {
+                        tempArray[i][j] = tempArray[i - 1][j] + tempArray[i][j - 1];
+                    }
+                    if (tempArray[i - 1][j] === -1 && tempArray[i][j] !== -1) {
+                        tempArray[i][j] = tempArray[i][j - 1]
+                    }
+                    if (tempArray[i][j - 1] === -1 && tempArray[i][j] !== -1) {
+                        tempArray[i][j] = tempArray[i - 1][j]
+                    }
+                }
+            }
+            if (tempArray[rowlength - 1][collength - 1] === -1) {
+                res = 0
+            } else {
+                res = tempArray[rowlength - 1][collength - 1];
+            }
+
+            console.log(res);
+            console.log(tempArray);
+        };
+
+        uniquePathsWithObstacles([
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0
+            ],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0
+            ]
+        ])
+        uniquePathsWithObstacles([
+            [0, 0, 0],
+            [0, 1, 0],
+            [0, 0, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 1],
+            [0, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 0],
+            [0, 1]
+        ])
+        uniquePathsWithObstacles([
+            [0, 0, 1, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 1],
+            [1, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 0],
+            [1, 1],
+            [0, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 1, 0],
+            [1, 0, 0],
+            [0, 0, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 1, 0, 0],
+            [0, 0, 0, 0],
+            [1, 0, 1, 0],
+            [0, 0, 1, 0]
+        ])
+        uniquePathsWithObstacles([
+            [0, 1, 0, 0, 0],
+            [1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ])
+    </script>
+</body>
+
+</html>

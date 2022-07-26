@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组flat与flatMap方法</title>
+</head>
+<body>
+    <script>
+        // flat 
+        // 蒋多维数组转化为低维数组
+        const arr1 = [5,[99,[55,77]]];
+        let res1 = arr1.flat();
+        let res2 = arr1.flat(2);
+        console.log(res1);
+        console.log(res2);
+
+        // flatMap
+        // 也是把多维数组转化为低维数组，用于map中
+        const arr2 = [5,9,8,65,24];
+        const res3 = arr2.map(item =>[item * 10]);
+        console.log(res3);
+        const res4 = arr2.flatMap(item =>[item * 10]);
+        console.log(res4);
+
+    </script>
+</body>
+</html>

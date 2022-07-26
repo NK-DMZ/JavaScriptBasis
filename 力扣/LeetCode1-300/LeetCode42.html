@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42. 接雨水(困难 & 动态规划)</title>
+</head>
+
+<body>
+    <div>
+        <h1><a href="https://leetcode-cn.com/problems/trapping-rain-water/solution/jie-yu-shui-by-leetcode/">42. 接雨水(困难 & 动态规划)</a></h1>
+        <p>
+            给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，
+            下雨之后能接多少雨水。
+        </p>
+        示例 2：<br>
+        <img src="../image/42.rainwatertrap.png" alt=""> <br>
+        输入：height = [0,1,0,2,1,0,1,3,2,1,2,1] <br>
+        输出：6 <br>
+        解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+        <hr>
+        示例 2：<br>
+        输入：height = [4,2,0,3,2,5] <br>
+        输出：9 <hr>
+        <h2>解析</h2>
+        <h3>动态规划</h3>
+        <img src="../image/42.2.keyboard.png" alt=""> <br>
+        <img src="../image/42.3.keyboard.png" alt="">
+    </div>
+    <script>
+        var trap = function (height) {
+            let heightlength = height.length - 1;
+            let head = [] ;
+            let headmax = height[0];            
+            let foot = [];
+            let footmax = height[heightlength];
+            let res = 0;
+            for(let i = 0 ; i < height.length ; i++){                
+                if(height[i] > headmax){
+                    headmax = height[i];
+                }
+                head.push(headmax);
+            }
+            for(let j = heightlength ; j >= 0 ; j--){                
+                if(height[j] > footmax){
+                    footmax = height[j];
+                }
+                foot.push(footmax);
+            }
+            foot.reverse();
+            for(let k = 0 ; k < height.length ; k++){
+                if(height[k] < head[k] && height[k] < foot[k]){
+                    let temp = Math.min(head[k] , foot[k])- height[k];
+                    res = res + temp ;
+                }
+            }
+            console.log(res);
+        };
+        trap([0,1,0,2,1,0,1,3,2,1,2])
+    </script>
+</body>
+
+</html>

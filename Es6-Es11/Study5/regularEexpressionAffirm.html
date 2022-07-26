@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则扩展——反向断言</title>
+</head>
+<body>
+    <script>
+        // 声明字符串
+        let str = 'jsp521你知道吗555哈哈';
+
+        // 正向断言
+        let forward = /\d+(?=哈)/;
+        let res1 = forward.exec(str);
+        console.log(res1);
+
+        // 反向断言
+        let opposite = /(?<=吗)\d+/;
+        let res2 = opposite.exec(str);
+        console.log(res2);
+    </script>
+</body>
+</html>

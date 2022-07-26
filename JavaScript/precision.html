@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0.3 - 0.1 问题合集</title>
+</head>
+
+<body>
+    <div>
+        <h1>出现原因</h1>
+        小数点在计算机中是以二进制表示，而有些小数用二进制表示是无穷，
+        所以才会出现上面这种精确度的问题。 一些浮点数表示成二进制。 <br>
+        出现这个问题的原因，其实是因为数值的表示在计算机内部是用二进制的。
+        例如，十进制的0.625，换成二进制表示就是0.101(1*2-1+0*2-2+1*2-3)。
+        0.625这个数倒还好，刚好可以准确表示出来。但如果是0.1的话呢，
+        换成二进制就是0.00011(0011无限循环)，
+        也就是：0.000110011001100110011001100110011...，
+        位数是无限的，只能取近似。对于这些不能准确表示的数就有可能会出现这个问题。
+        为什么是可能呢？因为有些数的计算结果，例如0.1+0.3，它虽然也是不能精确地表示，但是它结果足够接近0.4，那取了近似后就成了0.4了。
+        <hr>
+        
+    </div>
+    <script>
+        // res1的结果并不等于0.2
+        let res1 = 0.3 + 0.1;
+        let res2 = 0.3 - 0.1;
+        console.log(res1);
+        console.log(res2);
+
+        // 精确计算
+        function numTofixed(num) {
+            if (typeof num === 'number') {
+                // 01 + 0.2 = 0.30000000000000004 截取小数点后10位。利用parseFloat去掉小数点后面的0
+                num = parseFloat(num.toFixed(10))
+            }
+            return num;
+        }
+
+        function way(num1, num2) {
+            let res3 = numTofixed(num1 - num2)
+            console.log(res3);
+        }
+        way(0.3, 0.1)
+        console.log("--------------");
+
+         // Number.EPSILON是javascript表示的最小精度
+        console.log(`Number.EPSILON是：${Number.EPSILON}`);         
+        function equal(a,b) {
+            if(Math.abs(b-a)<Number.EPSILON){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        console.log(`0.1+0.2是：${0.1+0.2}`);
+        console.log(`0.1+0.2 === 0.3是：${0.1+0.2 === 0.3}`);
+        console.log(`equal((0.1+0.2),0.3)是：${equal((0.1+0.2),0.3)}`);
+        console.log('-------------------');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>118. 杨辉三角</title>
+</head>
+
+<body>
+    <div>
+        <h1>
+            <a href="https://leetcode-cn.com/problems/pascals-triangle/">118. 杨辉三角</a>
+        </h1>
+        给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。<br>
+        在「杨辉三角」中，每个数是它左上方和右上方的数的和。<br>
+        <img src="../image/118.1626927345-DZmfxB-PascalTriangleAnimated2.gif" alt="">
+        <hr>
+        示例 1: <br>
+        输入: numRows = 5<br>
+        输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]] <hr>
+        示例 2:<br>
+        输入: numRows = 1<br>
+        输出: [[1]]
+    </div>
+    <script>
+        var generate = function (numRows) {
+            let res = [
+                [1],
+            ];
+            if (numRows === 1) {
+                console.log(res);
+                return res;
+            }
+            res.push([1, 1])
+            for (let i = 2; i < numRows; i++) {
+                res.push([])
+                res[i][0] = 1;
+                for (let j = 1; j < i + 1; j++) {
+                    res[i][j] = res[i - 1][j - 1] + res[i - 1][j];
+                    res[i][i] = 1;
+                }
+            }
+            console.log(res);
+            return res;
+        };
+        generate(1)
+        generate(2)
+        generate(3)
+        generate(5)
+    </script>
+</body>
+
+</html>

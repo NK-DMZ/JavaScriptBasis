@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trim、trimStart与trimEnd</title>
+</head>
+<body>
+    <script>
+        let str = "    123木头人    "
+        let res1 = str.trim();
+        let res2 = str.trimStart();
+        let res3 = str.trimEnd();
+        console.log(`原字符串${str}`);
+        console.log(`字符串用trim清除前后空字符串${res1}`);
+        console.log(`字符串用trimStart清除前空字符串${res2}`);
+        console.log(`字符串用trimEnd清除后空字符串${res3}`);
+    </script>
+</body>
+</html>

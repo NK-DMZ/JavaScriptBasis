@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leetcode 1380(已经通过)</title>
+</head>
+
+<body>
+    <script>
+        var luckyNumbers = function (matrix) {
+            let res = []
+            // console.log(matrix[0]);
+            for (let i = 0; i < matrix.length; i++) {
+                minline = minfun(matrix[i])
+                // console.log(`下标为${minline}`);
+                let maxRow = matrix[i][minline];
+                for (let j = 0; j < matrix.length; j++) {
+                    // console.log(maxRow);
+                    // console.log(matrix[j][minline]);
+                    if(maxRow < matrix[j][minline]){
+                        maxRow = matrix[j][minline]
+                        break;
+                    }
+                }
+               if(maxRow === matrix[i][minline]){
+                    res.push(matrix[i][minline])
+               }
+            }
+            console.log(`最终结果${res}`);
+            return res;
+        };
+
+        function minfun(params) {
+            // console.log(params);
+            let minValue = params[0];
+            let loc = 0;
+            for (let i = 1; i < params.length; i++) {
+                if (minValue > params[i]) {
+                    minValue = params[i]
+                    loc = i;
+                }
+            }
+            return loc;
+        }
+
+        luckyNumbers([
+            [1, 10, 4, 2],
+            [9, 3, 8, 7],
+            [15, 16, 17, 12]
+        ])
+        luckyNumbers([
+            [7,8],
+            [1,2]
+        ])
+       
+    </script>
+</body>
+
+</html>

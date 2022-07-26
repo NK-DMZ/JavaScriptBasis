@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则扩展——命名捕获分组</title>
+</head>
+
+<body>
+    <div>
+        <h1>JavaScript exec() 方法</h1>
+        <h2>定义和用法</h2>
+        <p>exec() 方法用于检索字符串中的正则表达式的匹配。</p>
+        <h2>语法</h2>
+        <p>RegExpObject.exec(string)</p>
+        <h2>返回值</h2>
+        <p>返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。</p>
+        <h2>说明</h2>
+        <p>exec() 方法的功能非常强大，它是一个通用的方法，而且使用起来也比 test() 方法以及支持正则表达式的 String 对象的方法更为复杂。</p>
+        如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。此数组的第 0 个元素是与正则表达式相匹配的文本，第 1 个元素是与 RegExpObject 的第 1
+        个子表达式相匹配的文本（如果有的话），第 2 个元素是与 RegExpObject 的第 2 个子表达式相匹配的文本（如果有的话），以此类推。除了数组元素和 length 属性之外，exec()
+        方法还返回两个属性。index 属性声明的是匹配文本的第一个字符的位置。input 属性则存放的是被检索的字符串 string。我们可以看得出，在调用非全局的 RegExp 对象的 exec() 方法时，返回的数组与调用方法
+        String.match() 返回的数组是相同的。<br>
+        但是，当 RegExpObject 是一个全局正则表达式时，exec() 的行为就稍微复杂一些。它会在 RegExpObject 的 lastIndex 属性指定的字符处开始检索字符串 string。当 exec()
+        找到了与表达式相匹配的文本时，在匹配后，它将把 RegExpObject 的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置。这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。当
+        exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。<br>
+        <h2>提示和注释</h2>
+        重要事项：如果在一个字符串中完成了一次模式匹配之后要开始检索新的字符串，就必须手动地把 lastIndex 属性重置为 0。<br>
+        <b>提示：</b> 请注意，无论 RegExpObject 是否是全局模式，exec() 都会把完整的细节添加到它返回的数组中。这就是 exec() 与 String.match()
+        的不同之处，后者在全局模式下返回的信息要少得多。因此我们可以这么说，在循环中反复地调用 exec() 方法是唯一一种获得全局模式的完整模式匹配信息的方法。<br>
+
+        <h1>avaScript match() 方法</h1>
+        <h2>定义和用法</h2>
+        match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。<br>
+        该方法类似 indexOf() 和 lastIndexOf()，但是它返回指定的值，而不是字符串的位置。<br>
+        <h2>语法</h2>
+        stringObject.match(searchvalue) <br>
+        stringObject.match(regexp) <br>
+        参数 <span style="margin-left: 200px;">描述</span><br>
+        searchvalue <span style="margin-left: 145px;">必需。规定要检索的字符串值。</span><br>
+        regexp <span style="margin-left: 178px;">必需。规定要匹配的模式的 RegExp 对象。如果该参数不是 RegExp 对象，则需要首先把它传递给 RegExp 构造函数，将其转换为 RegExp 对象。</span><br>
+        <h2>返回值</h2>
+        存放匹配结果的数组。该数组的内容依赖于 regexp 是否具有全局标志 g。<br>
+        <h2>说明</h2>
+        match() 方法将检索字符串 stringObject，以找到一个或多个与 regexp 匹配的文本。这个方法的行为在很大程度上有赖于 regexp 是否具有标志 g。<br>
+        如果 regexp 没有标志 g，那么 match() 方法就只能在 stringObject 中执行一次匹配。如果没有找到任何匹配的文本， match() 将返回null。
+        否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。该数组的第 0 个元素存放的是匹配文本，而其余的元素存放的是与正则表达式
+        的子表达式匹配的文本。除了这些常规的数组元素之外，返回的数组还含有两个对象属性。index 属性声明的是匹配文本的起始字符在 stringObject
+        中的位置，input 属性声明的是对 stringObject 的引用。<br>
+        如果 regexp 具有标志 g，则 match() 方法将执行全局检索，找到 stringObject 中的所有匹配子字符串。若没有找到任何匹配的子串，则返回
+        null。如果找到了一个或多个匹配子串，则返回一个数组。不过全局匹配返回的数组的内容与前者大不相同，它的数组元素中存放的是 stringObject 
+        中所有的匹配子串，而且也没有 index 属性或 input 属性。
+        <b>注意：</b> 在全局检索模式下，match() 即不提供与子表达式匹配的文本的信息，也不声明每个匹配子串的位置。如果您需要这些全局检索的信息，可以使用 RegExp.exec()。
+        <h1> 一、 exec match 分别是谁家的方法</h1>
+        <p>exec是RegExp类的方法</p>
+        <p>match是String类的方法</p>
+        <p>分清楚是各是哪里的方法之后，就知道怎么使用了</p>
+        <h5>栗子：</h5>
+        <p>/hello/.exec('hello world');</p>
+        <p>'hello world'.match(/'hello'/);</p>
+
+        <h1> 二、 区别</h1>
+        <p>简单来说，跟g有关系</p>
+        <p>exec 只会匹配第一个符合的字符串（意味着g对其不起作用），跟所有分组的反向引用</p>
+        <p> match 是否返回所有匹配的数组跟正则表达式里是否带着g有关系</p>
+        <a href="http://www.cnblogs.com/xiehuiqi220/archive/2008/12/01/1327487.html"></a>
+
+    </div>
+    <script>
+        // 声明一个字符串
+        let str = ' <a href="https://www.bilibili.com">bilibili</a>'
+
+        // 提取url与标签文本
+        const reg1 = / <a href="(.*)">(.*)<\/a>/;
+
+        // 执行
+        const result1 = reg1.exec(str);
+        console.log(result1);
+        console.log(result1[0]);
+        console.log(result1[1]);
+        console.log(result1[2]);
+        console.log("-----");
+
+        // 提取url与标签文本
+        const reg2 = / <a href="(?<url>.*)">(?<text>.*)<\/a>/;
+
+        // 执行
+        const result2 = reg2.exec(str);
+        console.log(result2);
+        console.log(result2.groups.url);
+        console.log(result2.groups.text);
+    </script>
+</body>
+
+</html>

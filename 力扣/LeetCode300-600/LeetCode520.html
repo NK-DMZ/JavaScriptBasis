@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>520. 检测大写字母</title>
+</head>
+
+<body>
+    <script>
+        // 执行用时： 80 ms, 在所有 JavaScript 提交中击败了55 .96 % 的用户
+        // 内存消耗： 39.1 MB, 在所有 JavaScript 提交中击败了74 .37 % 的用户
+        var detectCapitalUse = function (word) {
+            let res = word.split("");
+            console.log(res);
+            let maxarr = [];
+            let bool;
+            for (let i = 0; i < res.length; i++) {
+                if (res[i] >= 'A' && res[i] <= 'Z') {
+                    maxarr.push(res[i])
+                }
+            }
+            if (maxarr.length === res.length || maxarr.length === 0) {
+                bool = true;
+                console.log(bool);
+                return;
+            }
+            if (maxarr.length === 1 && res.indexOf(maxarr[0]) === 0) {
+                bool = true;
+            } else {
+                bool = false;
+            }
+            console.log(maxarr);
+            console.log(bool);
+            console.log("----");
+        };
+
+        function judge(params) {
+            let bool;
+            // 判断输入字符是否是大写
+            if (params < 'A' || params > 'Z') {
+                bool = false;
+            } else {
+                bool = true;
+            }
+            // console.log(bool);
+            return bool;
+        }
+        detectCapitalUse("FlaG");
+        detectCapitalUse("b");
+        detectCapitalUse("A")
+        detectCapitalUse("Bee")
+    </script>
+</body>
+
+</html>

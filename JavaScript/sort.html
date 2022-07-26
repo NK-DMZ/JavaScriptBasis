@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序问题sort</title>
+</head>
+<body>
+    <script>
+        let arr =[-68,-96,-12,-40,16];
+        function sortFun(params) {
+            params.sort()
+            console.log(params);
+        }
+        function sequenceFun(params) {
+            params.sort((a,b)=>a-b)
+            console.log(params);
+        }
+        sortFun(arr)
+        sequenceFun(arr)
+    </script>
+</body>
+</html>

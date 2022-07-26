@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>563. 二叉树的坡度</title>
+</head>
+
+<body>
+    <div>
+        <h1><a href="https://leetcode-cn.com/problems/binary-tree-tilt/">563. 二叉树的坡度</a></h1>
+    </div>
+    <script>
+        var findTilt = function (root) {
+            let ans = 0;
+
+            const dfs = (node) => {
+                if (!node) {
+                    return 0;
+                }
+                const sumLeft = dfs(node.left);
+                const sumRight = dfs(node.right);
+                ans += Math.abs(sumLeft - sumRight);
+                return sumLeft + sumRight + node.val;
+            }
+
+            dfs(root);
+            return ans;
+        };
+        findTilt([1, 2, 3])
+    </script>
+</body>
+
+</html>

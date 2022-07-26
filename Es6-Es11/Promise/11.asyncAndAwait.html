@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async与await</title>
+</head>
+
+<body>
+    <div>
+        <h1>4.1.async和 await</h1>
+        <p> async 和 await两种语法结合可以让异步代码像同步代码一样</p>
+        <h2> 4.1.1.async函数</h2>
+        <p> 1. async函数的返回值为promise对象，</p>
+        <p> 2. promise对象的结果由async函数执行的返回值决定</p>
+        <h2>4.1.2.await表达式</h2>
+        <p>1. await必须写在 async函数中</p>
+        <p>2. await右侧的表达式一般为promise 对象</p>
+        <p>3. await返回的是promise成功的值</p>
+        <p>4. await的 promise失败了，就会抛出异常，需要通过 try.catch捕获处理</p>
+    </div>
+    <script>
+        // 创建promise对象
+        const p1 = new Promise((resolve, reject) => {
+            resolve("成功啦！")
+        })
+        const p2 = new Promise((resolve, reject) => {
+            resolve("失败了！")
+        })
+
+        // await 要放在async函数中
+        async function sunccess(params) {
+            let res = await p1;
+            console.log(res);
+        }
+        async function fail(params) {
+            try {
+                let res = await p2;
+                console.log(res);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        sunccess();
+        fail();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>allSettled 和 all</title>
+</head>
+<body>
+    想得到每一个异步结果的情况可以用allSettled，如果想所有的都成功了再去执行下一步用all
+    <script>
+        const p1 = new Promise((resolve,reject) =>{
+            setTimeout(()=>{
+                resolve('商品数据1')
+            },1000)
+        })
+        const p2 = new Promise((resolve,reject) =>{
+            setTimeout(()=>{
+                resolve('商品数据2')
+            },1000)
+        })
+        const p3 = new Promise((resolve,reject) =>{
+            setTimeout(()=>{
+                reject("出错了！")
+            },1000)
+        })
+
+        // 调用allSettled方法，返回的都是成功的回调，哪怕其中有一个失败返回的也是成功的
+        const res1 = Promise.allSettled([p1,p2]);
+        const res2 = Promise.allSettled([p1,p3]);
+        // [[PromiseStatus]]: "resolved"
+        console.log(res1);
+        console.log(res2);
+        console.log("----------");
+
+        // 调用all方法,如果有一个失败就会返回失败的回调
+        // 返回的值是成功的结果组成的数组
+        const res3 = Promise.all([p1,p2]);
+        // [[PromiseStatus]]: "rejected"
+        const res4 = Promise.all([p1,p3]);
+        console.log(res3);
+        console.log(res4);
+    </script>
+</body>
+</html>

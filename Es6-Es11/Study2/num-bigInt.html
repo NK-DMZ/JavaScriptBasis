@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大整形</title>
+</head>
+
+<body>
+    <script>
+        // 大整形在数后面加n即可
+        let n = 521n;
+        console.log(n, typeof (n));
+
+        // 函数：
+        // 整数转为大整形
+        let inputnum = 123;
+        let resinput = BigInt(inputnum);
+        console.log(resinput);
+        console.log(typeof (res));
+
+        // 不能用于非整形
+        let floatnum = 1.2;
+        // let resfloat = BigInt(floatnum);
+        // console.log(resfloat);
+
+        // bigInt.html: 24 Uncaught RangeError: The number 1.2 cannot be converted to a BigInt because it is not an integer
+        // at BigInt( < anonymous > )
+        // at bigInt.html: 24
+
+        // 大整数用于大整数运算
+        let maxnum = Number.MAX_SAFE_INTEGER;
+        console.log(maxnum);
+        console.log(maxnum + 1);
+        // 会出现问题，不能继续加了
+        console.log(maxnum + 2);
+
+        // 解决方法
+        console.log(BigInt(maxnum) + BigInt(1));
+        console.log(BigInt(maxnum) + BigInt(2));
+    </script>
+</body>
+
+</html>

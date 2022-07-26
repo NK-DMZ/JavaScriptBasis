@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则dotAll模式</title>
+</head>
+
+<body>
+    <h1>正则dotAll模式</h1>
+    <p>本节讲述的是用 <b>.*?</b> 代替换行 </p>
+    <ul>
+        <li>
+            <a>肖生克的救赎</a>
+            <p>上映时间：1994-09-10</p>
+        </li>
+        <li>
+            <a>阿甘正传</a>
+            <p>上映时间：1994-06-10</p>
+        </li>
+    </ul>
+    <script>
+        let str = `
+        <ul>
+            <li>
+                <a>肖生克的救赎</a>
+                <p>上映时间：1994-09-10</p>
+            </li>
+            <li>
+                <a>阿甘正传</a>
+                <p>上映时间：1994-06-10</p>
+            </li>
+        </ul>
+        `
+
+        // 声明正则
+        const reg1 = /<li>\s+<a>(.*?)<\/a>\s+<p>(.*?)<\/p>/;
+        let res1 = reg1.exec(str)
+        console.log(res1);
+        console.log(res1[1]);
+        console.log(res1[2]);
+
+        console.log("-------------------");
+        const reg2 = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/s;
+        let res2 = reg2.exec(str)
+        console.log(res2);
+        console.log(res2[1]);
+        console.log(res2[2]);
+
+
+        // 全局匹配
+        console.log("-----------------");
+        const reg3 = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/gs;
+        let res4;
+        let data = [];
+        while (res4 = reg3.exec(str)) {
+            console.log(res4);
+            data.push({title : res4[1],time:res4[2]})
+        }
+        console.log(data);
+    </script>
+</body>
+
+</html>

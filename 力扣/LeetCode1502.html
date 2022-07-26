@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1502. 判断能否形成等差数列</title>
+</head>
+
+<body>
+    <div>
+        给你一个数字数组 arr 。<br>
+        如果一个数列中，任意相邻两项的差总等于同一个常数，那么这个数列就称为等差数列 。<br>
+        如果可以重新排列数组形成等差数列，请返回 true ；否则，返回 false 。<hr>       
+        示例 1：<br>
+        输入：arr = [3,5,1]
+        输出：true
+        解释：对数组重新排序得到 [1,3,5] 或者 [5,3,1] ，任意相邻两项的差分别为 2 或 -2 ，可以形成等差数列。<hr>
+        示例 2：<br>
+        输入：arr = [1,2,4]
+        输出：false
+        解释：无法通过重新排序得到等差数列。
+
+    </div>
+    <script>
+        var canMakeArithmeticProgression = function (arr) {
+            arr.sort((a,b)=>a-b);
+            console.log(arr);
+            let poor =arr[1] - arr[0];
+            console.log(poor);
+            let res;
+            for(let i = 1 ;i < arr.length ; i++){
+                if( (arr[i] - arr[i-1]) !== poor){
+                    console.log((arr[i] - arr[i-1]));
+                    res = false;
+                    break;
+                }else{
+                    res = true;
+                }
+            }
+            console.log(res);
+        };
+        // canMakeArithmeticProgression([3, 5, 1])
+        // canMakeArithmeticProgression([1,2,4])
+        // canMakeArithmeticProgression([-68,-96,-12,-40,16])//排序出问题
+        canMakeArithmeticProgression([1,10,10,10,19])//继续循环了
+    </script>
+</body>
+
+</html>

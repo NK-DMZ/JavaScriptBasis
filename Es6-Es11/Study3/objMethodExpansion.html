@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象方法拓展</title>
+</head>
+
+<body>
+    <script>
+        const school = {
+            name: "算法大师",
+            city: ['北京', '南京', '重庆', '海南', '武汉'],
+            technology: ['Java', 'C++', 'Python', 'Go']
+        }
+
+        // 获取对象所有的键
+        const objKeys = Object.keys(school);
+        console.log(`Object.keys运行结果是：${objKeys}`);
+        console.log(objKeys);
+
+        // 获取对象所有的值
+        const objValues = Object.values(school);
+        console.log(`Object.values运行结果是：${objValues}`);
+        console.log(objValues);
+
+        // entries
+        const objEntries = Object.entries(school);
+        console.log(objEntries);
+
+        // 创建Map
+        const m = new Map(Object.entries(school));
+        console.log(m);
+
+        // 对象属性的描述对象
+        // 可用于深层次对象的克隆
+        const objcreate = Object.create(null, {
+            name: {
+                // 设置值
+                value: '校园大使',
+                // 属性特性
+                // 是否可写
+                writable: false,
+                // 是否可以删除
+                configurable: true,
+                // 是否可以枚举
+                enumerable: false
+            }
+        })
+        console.log(objcreate);
+        let des = Object.getOwnPropertyDescriptor(objcreate, "name");
+        console.log(des);
+        let otherdes = Object.getOwnPropertyDescriptor(school,"city");
+        console.log(otherdes);
+    </script>
+</body>
+
+</html>

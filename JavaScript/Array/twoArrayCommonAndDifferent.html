@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>求两个数组共有元素或者是不同元素</title>
+</head>
+
+<body>
+    见LeetCode350题，这个关于求两个数组交集的解法不错
+    <script>
+        let arr3 = [1, 8, 0, 7];
+        let arr4 = [7, 8, 1, 0];
+
+        // let arr3 = [1, 1, 2, 3];
+        // let arr4 = [0, 1, 1, 1];
+
+        // let arr3 = [1, 1];
+        // let arr4 = [0, 1];
+
+        //方案1：发现相同的元素，同时把两个数组对应的元素删除，依次循环得到最终答案
+        function differentData1(a, b) { 
+            //循环判断数组a里的元素在b里面有没有，有的话就放入新建立的数组中
+            let arr1 = [...a];
+            let arr2 = [...b];
+            let result = [];
+            console.log(arr1);
+            for (let i = 0; i <= arr1.length; ++i) {
+                for (let j = 0; j < arr2.length; j++) {
+                    if (arr1[i] === arr2[j]) {
+                        result.push(arr1[i]);
+                        console.log(result);
+                        arr1.splice(i, 1);
+                        console.log(arr1);
+                        arr2.splice(j, 1);
+                        console.log(arr2);
+                        console.log("------");
+                        i = -1;
+                    }
+                }
+            }
+            console.log(result);
+            return result;
+        }
+
+        //方案二：发现相同的元素，同时把两个数组对应的元素赋值其他类型的数据值，依次循环得到最终答案，这个方法需要判断元素类型，严格控制变量
+        function differentData2(a, b) { 
+            //循环判断数组a里的元素在b里面有没有，有的话就放入新建立的数组中
+            let arr1 = [...a];
+            let arr2 = [...b];
+            let result = [];
+            for (let i = 0; i < arr1.length; i++) {
+                for (let j = 0; j < arr2.length; j++) {
+                    if (arr1[i] === arr2[j] && typeof (arr1[i]) === "number" && typeof (arr2[i]) === "number") {
+                        result.push(arr1[i]);
+                        arr1[i] = "null";
+                        arr2[j] = "null";
+                    }
+                }
+            }
+            console.log(result);
+            return result;
+        }
+        let res1 = differentData1(arr3, arr4);
+        console.log(`res1是${res1}`);
+
+        console.log(arr3);
+        console.log(arr4);
+
+        let res2 = differentData2(arr3, arr4);
+        console.log(`res2是${res2}`);
+    </script>
+    <script>
+        // 网上求两个数组交集以及差集的方法
+        console.log("----------");
+        // let a = [1, 8, 0, 7];
+        // let b = [7, 8, 1, 0];
+
+        // let a = [1, 1, 2, 3];
+        // let b = [0, 1, 1, 1];
+
+        let a = [1, 1];
+        let b = [0, 1];
+
+        // 此求交集方法通过不了期望测试用例[1, 1]和[0, 1]，期望值为交集：[1]，差集：[0]，
+        // 但本方法可以获得a数组中与b数组重合的所有元素
+        let intersection = a.filter(v => b.includes(v));
+        let difference = a.concat(b).filter(v => !a.includes(v) || !b.includes(v))
+        console.log(intersection);
+        console.log(difference);
+    </script>
+</body>
+
+</html>

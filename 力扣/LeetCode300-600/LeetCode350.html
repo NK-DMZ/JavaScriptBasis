@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>350. 两个数组的交集 II</title>
+</head>
+
+<body>
+    <div>
+        <h1><a href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/">350. 两个数组的交集 II</a></h1>
+        给定两个数组，编写一个函数来计算它们的交集。
+        <hr>
+        示例 1：<br>
+        输入：nums1 = [1,2,2,1], nums2 = [2,2]<br>
+        输出：[2,2]
+        <hr>
+        示例 2:<br>
+        输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]<br>
+        输出：[4,9]
+        <hr>
+        说明：<br>
+        输出结果中每个元素出现的次数，应与元素在两个数组中出现次数的最小值一致。<br>
+        我们可以不考虑输出结果的顺序。
+        <hr>
+        进阶：<br>
+        如果给定的数组已经排好序呢？你将如何优化你的算法？<br>
+        如果 nums1 的大小比 nums2 小很多，哪种方法更优？<br>
+        如果 nums2 的元素存储在磁盘上，内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？<br>
+        <h2>解法</h2>
+        <h3>哈希表</h3>
+        <img src="../image/350_fig1.gif" alt=""><br>
+        由于同一个数字在两个数组中都可能出现多次，因此需要用哈希表存储每个数字出现的次数。对于一个数字，其在交集中出现的次数等于该数字在两个数组中出现次数的最小值。
+        首先遍历第一个数组，并在哈希表中记录第一个数组中的每个数字以及对应出现的次数，然后遍历第二个数组，对于第二个数组中的每个数字，如果在哈希表中存在这个数字，则将该数字添加到答案，并减少哈希表中该数字出现的次数。
+        为了降低空间复杂度，首先遍历较短的数组并在哈希表中记录每个数字以及对应出现的次数，然后遍历较长的数组得到交集。
+
+        <h3>双指针</h3>
+        <img src="../image/350.双指针解法1.png" alt="" style="width: 50%;">
+        <img src="../image/350.双指针解法2.png" alt="" style="width: 50%;"><br>
+        如果两个数组是有序的，则可以使用双指针的方法得到两个数组的交集。
+        首先对两个数组进行排序，然后使用两个指针遍历两个数组。
+        初始时，两个指针分别指向两个数组的头部。每次比较两个指针指向的两个数组中的数字，如果两个数字不相等，则将指向较小数字的指针右移一位，如果两个数字相等，将该数字添加到答案，并将两个指针都右移一位。当至少有一个指针超出数组范围时，遍历结束。
+    </div>
+    <script>
+        // 哈希表
+        // 执行用时：104 ms, 在所有 JavaScript 提交中击败了5.32%的用户
+        // 内存消耗：40.1 MB, 在所有 JavaScript 提交中击败了14.43%的用户
+        var intersect = function (nums1, nums2) {
+            let m = new Map();
+            let arr1 = [];
+            let arr2 = [];
+            // arr1是长度小的数组，arr2是长度大的数组，
+            if (nums1.length > nums2.length) {
+                arr1 = [...nums2];
+                arr2 = [...nums1];
+            } else {
+                arr1 = [...nums1];
+                arr2 = [...nums2];
+            }
+            console.log(arr1);
+            console.log(arr2);
+            let res = [];
+            // 1.把nums1用哈希表映射
+            for (let i = 0; i < arr1.length; i++) {
+                let k = m.get(arr1[i]);
+                if (m.has(arr1[i])) {
+                    k++;
+                    m.set(arr1[i], k)
+                } else {
+                    m.set(arr1[i], 1)
+                }
+            }
+            // 2.遍历num2，找到一个哈希表对应的数少一个
+            console.log(m);
+            for (let i = 0; i < arr2.length; i++) {
+                // 在短数组中找到长数组的元素，短数组的下标
+                console.log(i);
+                let temp = arr1.indexOf(arr2[i]);
+                if (temp !== -1 && m.get(arr1[temp]) > 0) {
+                    res.push(arr1[temp]);
+                    console.log(arr1[temp]);
+                    let k = m.get(arr1[temp]);
+                    console.log(k);
+                    k--;
+                    console.log(k);
+                    m.set(arr1[temp], k)
+                    console.log(m);
+                }
+            }
+            console.log(res);
+        };
+        intersect([1, 2, 2, 1], [2, 2])
+        // intersect([4, 9, 5, 4], [9, 4, 9, 8, 4])
+        // intersect([3, 1, 2], [1, 1])
+        // [1]
+    </script>
+    <script>
+        // 执行用时： 76 ms, 在所有 JavaScript 提交中击败了62 .14 % 的用户
+        // 内存消耗： 40 MB, 在所有 JavaScript 提交中击败了17 .92 % 的用户
+        var intersect = function (nums1, nums2) {
+            let arr1 = [...nums1].sort((a, b) => a - b);
+            let arr2 = [...nums2].sort((a, b) => a - b);
+            let left = 0;
+            let right = 0;
+            let res = []
+            while (left < arr1.length && right < arr2.length) {
+                if (arr1[left] === arr2[right]) {
+                    res.push(arr1[left])
+                    left++
+                    right++
+                } else if (arr1[left] > arr2[right]) {
+                    right++
+                } else left++
+            }
+            console.log(res);
+        };
+        // intersect([1, 2, 2, 1], [2, 2])
+        // intersect([4, 9, 5, 4], [9, 4, 9, 8, 4])
+        // [4,9,4]
+        // intersect([3, 1, 2], [1, 1])
+        // [1]
+        intersect([43, 85, 49, 2, 83, 2, 39, 99, 15, 70, 39, 27, 71, 3, 88, 5, 19, 5, 68, 34, 7, 41, 84, 2, 13, 85, 12,
+            54, 7, 9, 13, 19, 92
+        ], [10, 8, 53, 63, 58, 83, 26, 10, 58, 3, 61, 56, 55, 38, 81, 29, 69, 55, 86, 23, 91, 44, 9, 98, 41, 48,
+            41, 16, 42, 72, 6, 4, 2, 81, 42, 84, 4, 13
+        ])
+        // [2,83,3,41,84,13,9]
+    </script>
+</body>
+
+</html>

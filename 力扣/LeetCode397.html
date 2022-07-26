@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>397. 整数替换</title>
+</head>
+
+<body>
+    <div>
+        <h1><a href="https://leetcode-cn.com/problems/integer-replacement/">397. 整数替换</a></h1>
+    </div>
+    <script>
+        var integerReplacement = function (n) {
+            if (n === 1) {
+                return 0;
+            }
+            let res = 0;
+            for (let i = 0; n > 1 ; i++) {
+                console.log(n);
+                if (n % 2 === 0) {
+                    n = n / 2;
+                    res++;
+                } else {
+                    if ((n + 1) % 2 === 0) {
+                        n = (n + 1) / 2;
+                        res = res+2;
+                    } else {
+                        n = (n - 1) / 2;
+                        res = res+2;
+                    }
+                }
+                console.log(`修改后的n：${n}`);
+            }
+            console.log(res);
+            console.log("----");
+        };
+        integerReplacement(89)
+        integerReplacement(8)
+    </script>
+</body>
+
+</html>

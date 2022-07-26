@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number对象（进制、最大最小值、数字方法）</title>
+    <style>
+        td {
+            width: 650px;
+            text-align: center;
+        }
+
+        table {
+            margin: 50px 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number对象</h1>
+    <p>
+        <h2>所有 JavaScript 数字均为 64 位</h2>
+        JavaScript 不是类型语言。与许多其他编程语言不同，JavaScript 不定义不同类型的数字，比如整数、短、长、浮点等等。
+        在JavaScript中，数字不分为整数类型和浮点型类型，所有的数字都是由 浮点型类型。
+        JavaScript 采用 IEEE754 标准定义的 64 位浮点格式表示数字，它能表示
+        <b>最大值（Number.MAX_VALUE）为 ±1.7976931348623157e+308，最小值（Number.MIN_VALUE）为 ±5e-324。</b>
+        此格式用 64 位存储数值，其中 0 到 51 存储数字（片段），52 到 62 存储指数，63 位存储符号：
+    </p>
+    <img src="./image/Number对象1.png" alt="">
+    <img src="./image/Number对象2.png" alt="">
+    <img src="./image/Number对象3.png" alt="">
+    <hr>
+
+    <h2>精度</h2>
+    <p>整数（不使用小数点或指数计数法）最多为 15 位。</p>
+    <p>小数的最大位数是 17，但是浮点运算并不总是 100% 准确</p><hr>
+
+    <h2>八进制和十六进制</h2>
+    <p>在ES6-ES11/Study2/num-numberExpand中有对进制的详细演示</p>
+    <p>如果前缀为 0，则 JavaScript 会把数值常量解释为八进制数，如果前缀为 0 和 "x"，则解释为十六进制数。</p>
+    <hr>
+
+    <h2>无穷大（Infinity）</h2>
+    <p>
+        当数字运算结果超过了JavaScript所能表示的数字上限（溢出），结果为一个特殊的无穷大（infinity）值，
+        在JavaScript中以Infinity表示。同样地，当负数的值超过了JavaScript所能表示的负数范围，结果为负无穷大，
+        在JavaScript中以-Infinity表示。无穷大值的行为特性和我们所期望的是一致的：基于它们的加、减、乘和除运
+        算结果还是无穷大（当然还保留它们的正负号）。
+    </p><hr>
+
+    <h2>NaN - 非数字值</h2>
+    <p>NaN 属性是代表非数字值的特殊值。该属性用于指示某个值不是数字。可以把 Number 对象设置为该值，来指示其不是数字值。</p>
+    <p>你可以使用 isNaN() 全局函数来判断一个值是否是 NaN 值。</p>
+    <hr>
+
+    <h2>数字可以是数字或者对象</h2>
+    <p>数字可以私有数据进行初始化，就像 x = 123;</p>
+    <p>JavaScript 数字对象初始化数据， var y = new Number(123);</p>
+    <button onclick="numberOrObject()">数字可以是数字或者对象</button>
+    <hr>
+    <div class="tableclass">
+        <table border="1">
+            <th colspan="2"><a href="https://www.runoob.com/js/js-obj-number.html">Number属性</a></th>
+            <tr>
+                <td>属性</td>
+                <td>描述</td>
+            </tr>
+            <tr>
+                <td>Number.MAX_VALUE</td>
+                <td>最大值</td>
+            </tr>
+            <tr>
+                <td>Number.MIN_VALUE</td>
+                <td>最小值</td>
+            </tr>
+            <tr>
+                <td>Number.NaN</td>
+                <td>非数字</td>
+            </tr>
+            <tr>
+                <td>Number.NEGATIVE_INFINITY</td>
+                <td>负无穷，在溢出时返回</td>
+            </tr>
+            <tr>
+                <td>Number.POSITIVE_INFINITY</td>
+                <td>正无穷，在溢出时返回</td>
+            </tr>
+            <tr>
+                <td>Number.EPSILON</td>
+                <td>表示 1 和比最接近 1 且大于 1 的最小 Number 之间的差别</td>
+            </tr>
+            <tr>
+                <td>Number.MIN_SAFE_INTEGER</td>
+                <td>最小安全整数。</td>
+            </tr>
+            <tr>
+                <td>Number.MAX_SAFE_INTEGER</td>
+                <td>最大安全整数。</td>
+            </tr>
+        </table>
+        <table border="1">
+            <th colspan="2">数字方法</th>
+            <tr>
+                <td>方法</td>
+                <td>描述</td>
+            </tr>
+            <tr>
+                <td>Number.parseFloat()</td>
+                <td>将字符串转换成浮点数，和全局方法 parseFloat() 作用一致。</td>
+            </tr>
+            <tr>
+                <td>Number.parseInt()</td>
+                <td>将字符串转换成整型数字，和全局方法 parseInt() 作用一致。</td>
+            </tr>
+            <tr>
+                <td>Number.isFinite()</td>
+                <td>判断传递的参数是否为有限数字。</td>
+            </tr>
+            <tr>
+                <td>Number.isInteger()</td>
+                <td>判断传递的参数是否为整数。</td>
+            </tr>
+            <tr>
+                <td>Number.isNaN()</td>
+                <td>判断传递的参数是否为 isNaN()。</td>
+            </tr>
+            <tr>
+                <td>Number.isSafeInteger()</td>
+                <td>判断传递的参数是否为安全整数。</td>
+            </tr>
+        </table>
+        <table border="1">
+            <th colspan="2">数字类型原型上的一些方法</th>
+            <tr>
+                <td>方法</td>
+                <td>描述</td>
+            </tr>
+            <tr>
+                <td>toExponential()</td>
+                <td>返回一个数字的指数形式的字符串，如：1.23e+2</td>
+            </tr>
+            <tr>
+                <td>toFixed()</td>
+                <td>返回指定小数位数的表示形式。</td>
+            </tr>
+            <tr>
+                <td>toPrecision()</td>
+                <td>返回一个指定精度的数字。如下例子中，a=123 中，3会由于精度限制消失: </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        // 最大值最小值
+        let max = Number.MAX_SAFE_INTEGER;
+        let maxNum = Number.MAX_VALUE;
+        let minNegative = Number.MIN_SAFE_INTEGER;
+
+        function numberOrObject(params) {
+            let x = 123;
+            let y = new Number(123);
+            // 返回 Number
+            console.log(typeof (x));
+            // 返回 Object
+            console.log(typeof (y));
+        }
+    </script>
+</body>
+
+</html>

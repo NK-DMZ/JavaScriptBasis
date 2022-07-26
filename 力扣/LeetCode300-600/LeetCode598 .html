@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>598. 范围求和 II</title>
+</head>
+
+<body>
+    <div>
+        <h1>
+            <a href="https://leetcode-cn.com/problems/range-addition-ii/">598. 范围求和 II</a>
+        </h1>
+        给定一个初始元素全部为 0，大小为 m*n 的矩阵 M 以及在 M 上的一系列更新操作。<br>
+        <!-- 操作用二维数组表示，其中的每个操作用一个含有两个正整数 a 和 b 的数组表示，含义是将所有符合 0 <= i < a 以及 0 <= j < b 的元素 M[i][j] 的值都增加 1。<br> -->
+        在执行给定的一系列操作后，你需要返回矩阵中含有最大整数的元素个数。<hr>
+        示例 1: <br>
+        输入: <br>
+        m = 3, n = 3 <br>
+        operations = [[2,2],[3,3]] <br>
+        输出: 4 <br>
+        解释: <br>
+        初始状态, M = <br>
+        [[0, 0, 0], <br>
+        [0, 0, 0],  <br>
+        [0, 0, 0]] <br>
+
+        执行完操作 [2,2] 后, M = <br>
+        [[1, 1, 0], <br>
+        [1, 1, 0], <br>
+        [0, 0, 0]] <br>
+
+        执行完操作 [3,3] 后, M = <br>
+        [[2, 2, 1], <br>
+        [2, 2, 1], <br>
+        [1, 1, 1]] <br>
+
+        M 中最大的整数是 2, 而且 M 中有4个值为2的元素。因此返回 4。 <hr>
+        注意:  <br>
+        m 和 n 的范围是 [1,40000]。 <br>
+        a 的范围是 [1,m]，b 的范围是 [1,n]。 <br>
+        操作数目不超过 10000。 <br>
+    </div>
+    <!-- <script>
+        // 纯暴力解法，三重循环，不符合要求
+        var maxCount = function (m, n, ops) {
+            let initialArr = new Array(m).fill(0).map(() => {
+                return Array(n).fill(0)
+            });
+            let row;
+            let col;
+            for (let i = 0; i < ops.length; i++) {
+                row = ops[i][0];
+                col = ops[i][1];
+                console.log(`row是${row}`);
+                console.log(`col是${col}`);
+                for (let j = 0; j < row; j++) {
+                    for (let k = 0; k < col; k++) {
+                        initialArr[j][k]++;
+                    }
+                }
+            }
+            let resArr = [];
+            for (let j = 0; j < initialArr.length; j++) {
+                for (let k = 0; k < initialArr[0].length; k++) {
+                    resArr.push(initialArr[j][k])
+                }
+            }
+            resArr.sort((a,b)=>a-b);
+            let res = 0;
+            for(let i = resArr.length-1 ; i >= 0 ;i--){
+                if(resArr[i] === resArr[resArr.length - 1] ){
+                    res++;
+                }else{
+                    break;
+                }
+            }
+            console.log(res);
+            // console.log(`ops结果为${ops}`);
+
+            console.log(initialArr);
+        };
+        // maxCount(3, 3, [
+        //     [2, 2],
+        //     [3, 3]
+        // ])
+        maxCount(3, 3, [])
+        //预期是9
+        maxCount(40000 , 40000 , [])
+    </script> -->
+    <!-- <script>
+        // 执行用时：84 ms, 在所有 JavaScript 提交中击败了15.34%的用户
+        // 内存消耗：39.8 MB, 在所有 JavaScript 提交中击败了19.89%的用户
+        var maxCount = function (m, n, ops) {
+            let res;
+            if(ops.length === 0){
+                res = m * n;
+                console.log(res);
+                return;
+            }
+            let row = [];
+            let col = [];
+            for(let i = 0; i < ops.length ; i++){
+                row.push(ops[i][0]);
+                col.push(ops[i][1])
+            }
+            row.sort((a,b) => a-b);
+            col.sort((a,b) => a-b);
+            res  = row[0] * col[0];
+            console.log(res);
+        };
+
+        
+        // maxCount(3, 3, [
+        //     [2, 2],
+        //     [3, 3]
+        // ])
+        maxCount(3, 3, [])
+        //预期是9
+        // maxCount(40000, 40000, [])
+    </script> -->
+    <script>
+        // 执行用时：72 ms, 在所有 JavaScript 提交中击败了71.02%的用户
+        // 内存消耗：39.7 MB, 在所有 JavaScript 提交中击败了28.98%的用户
+
+        var maxCount = function (m, n, ops) {
+            let res;
+            let row = m;
+            let col = n;
+            for (let i = 0; i < ops.length; i++) {
+                row = Math.min(row, ops[i][0]);
+                col = Math.min(col, ops[i][1]);
+            }
+            res = row * col;
+            console.log(res);
+        };
+
+
+        // maxCount(3, 3, [
+        //     [2, 2],
+        //     [3, 3]
+        // ])
+        maxCount(3, 3, [])
+        //预期是9
+        // maxCount(40000, 40000, [])
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>73. 矩阵置零</title>
+</head>
+
+<body>
+    <script>
+        // 执行用时：120 ms, 在所有 JavaScript 提交中击败了6.77%的用户
+        // 内存消耗：39.9 MB, 在所有 JavaScript 提交中击败了70.08%的用户
+        var setZeroes = function (matrix) {
+            let row = [];
+            let col = [];
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[0].length; j++) {
+                    if(matrix[i][j] === 0){
+                        row.push(i);
+                        col.push(j);
+                    };
+                }
+            }
+            // let res = [...matrix];
+            // 执行用时：92 ms, 在所有 JavaScript 提交中击败了55.57%的用户
+            // 内存消耗：40 MB, 在所有 JavaScript 提交中击败了53.79%的用户
+            // 不创建额外数组直接在数组上修改后的结果
+
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[0].length; j++) {
+                    if(row.includes(i) || col.includes(j)){
+                        matrix[i][j] = 0;
+                    };
+                }
+            }
+            console.log(matrix);
+
+            console.log(row);
+            console.log(col);
+        };
+
+        setZeroes([
+            [1, 1, 1],
+            [1, 0, 1],
+            [1, 1, 1]
+        ])
+    </script>
+</body>
+
+</html>

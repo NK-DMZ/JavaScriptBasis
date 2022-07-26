@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        typeof 运算符返回一个用来表示表达式(的)数据类型(的)字符串。
+        可能(的)字符串有："number"、"string"、"boolean"、"object"、
+        "function" 和 "undefined"。<hr>
+        typeof会返回一个变量的基本类型，instanceof返回的是一个布尔值。<br>
+        typeof主要用来判断基础数据类型，instanceof则是用来判断引用数据类型。
+    </div>
+    <script>
+        let originate = "apple"
+        function indexOfFun(params) {
+            let trueres = params.indexOf('p');
+            let falaseres = params.indexOf('h');
+            document.write(`<hr>  indexof运行结果：${trueres} ${falaseres} <br>`);
+            console.log(trueres);
+            console.log(falaseres);
+        }
+        function typeFun() {
+            let stringres = typeof("params");
+            let numres = typeof(8);            
+            document.write(`indexof运行结果：${stringres} ${numres}`);
+            console.log(stringres);
+            console.log(numres);            
+        }
+        indexOfFun(originate)
+        console.log("--------------");
+        typeFun()
+    </script>
+</body>
+</html>
