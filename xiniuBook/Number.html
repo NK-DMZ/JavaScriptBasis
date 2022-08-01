@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进制</title>
+</head>
+
+<body>
+    <div id="counter">
+        <div class="base">
+            <h1>进制</h1>
+            <p>十进制：内容-----{{1010}}</p>
+            <p>十六进制：0x+内容-----{{0x1010}}</p>
+            <p>二进制：0b+内容-----{{0b1010}}</p>
+            <p>八进制：0o+内容-----{{0o1010}}</p>
+        </div>
+        <div class="float">
+            <h1>浮点字面量</h1>
+            <h2>科学计数法</h2>
+            <p>6.02e5:------{{6.02e5}}</p>
+            <p>6.02e-3:------{{6.02e-3}}</p>
+            <h2>分隔符不影响数字读取</h2>
+            <p>1_000_000:------{{1_000_000}}</p>
+            <p>1_0000_00:------{{1_0000_00}}</p>
+            <p>0xf_45_a:------{{0xf_45_a}}</p>
+            <p>0xf45a:------{{0xf45a}}</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const Counter = {
+            data() {
+                return {
+                    // count: 10
+                }
+            }
+        }
+
+        Vue.createApp(Counter).mount('#counter')
+    </script>
+</body>
+
+</html>

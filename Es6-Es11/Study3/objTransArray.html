@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>二维数组键值对与对象的互换</title>
 </head>
+
 <body>
     Object.fromEntries与Object.entries是逆运算
     <script>
         // 二维数组转对象
         const res1 = Object.fromEntries([
-            ['name','再生勇士'],
-            ['grade',120]
+            ['name', '再生勇士'],
+            // 两个属性一样取后面出现的属性
+            ['name', '英雄联盟'],
+            ['grade', 120]
         ])
         console.log(res1);
 
         // Map
         const m = new Map();
-        m.set('name','与天争锋');
-        const res2 =Object.fromEntries(m);
+        m.set('name', '与天争锋');
+        m.set('price', '99');
+        console.log(m);
+        const res2 = Object.fromEntries(m);
         console.log(res2);
 
         // Object.entries ES8
         const arr = Object.entries({
-            name:"周超"
+            name: "周超"
         })
         console.log(arr);
     </script>
 </body>
+
 </html>

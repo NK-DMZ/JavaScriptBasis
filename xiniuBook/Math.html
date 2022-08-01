@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>math对象</title>
+</head>
+
+<body>
+    <div id="app">
+        <h5>幂、对数</h5>
+        <p>Math.exp(9)- - - - - 9的平方 - - - - -{{Math.exp(9)}}</p>
+        <p>Math.cbrt(27)- - - - - 27的立方根 - - - - -{{Math.cbrt(27)}}</p>
+        <p>Math.pow(3,1/3)- - - - - 3的立方根 - - - - -{{Math.pow(3,1/3)}}</p>
+        <p>8**2 - - - - - 8的平方 - - - - -{{8**2}}</p>
+        <p>Math.pow(2,4)- - - - - 2的4次方 - - - - -{{Math.pow(2,4)}}</p>
+        <p>Math.sqrt(3)- - - - - 3的平方根 - - - - -{{Math.sqrt(3)}}</p>
+        <p>Math.hypot(3,4)- - - - - 所有参数的平方和的平方根 - - - - -{{Math.hypot(3,4)}}</p>
+
+        <p>Math.log(10)- - - - - 10的自然对数 - - - - -{{Math.log(10)}}</p>
+        <p>Math.log(100)/Math.LN10 - - - - - 以10为底100的对数 - - - - -{{Math.log(100)/Math.LN10}}</p>
+        <p>Math.log10(100)- - - - - 以10为底100的对数 - - - - -{{Math.log10(100)}}</p>
+        <p>Math.log(512)/Math.LN2 - - - - - 以2为底512的对数 - - - - -{{Math.log(512)/Math.LN2}}</p>
+        <h5>取整</h5>
+        <p>Math.round(2.3)- - - - - 四舍五入 - - - - -{{Math.round(2.3)}}</p>
+        <p>Math.round(2.9)- - - - - 四舍五入 - - - - -{{Math.round(2.9)}}</p>
+        <p>Math.ceil(2,4)- - - - - 向上取整 - - - - -{{Math.ceil(2.4)}}</p>
+        <p>Math.floor(2,4)- - - - - 向下取整 - - - - -{{Math.floor(2.4)}}</p>
+        <h5>绝对值</h5>
+        <p>Math.abs(2.4)- - - - - 取绝对值 - - - - -{{Math.abs(2.4)}}</p>
+        <p>Math.abs(-2.4)- - - - - 取绝对值 - - - - -{{Math.abs(-2.4)}}</p>
+        <h5>最大最小值</h5>
+        <p>Math.max(6,2,4,3)- - - - - 返回最大的参数 - - - - -{{Math.max(6,2,4,3)}}</p>
+        <p>Math.min(6,2,4,3)- - - - - 返回最大的参数 - - - - -{{Math.min(6,2,4,3)}}</p>
+        <h5>随机数</h5>
+        <p>Math.random()- - - - - 获取随机数0-1 - - - - -{{Math.random()}}</p>
+        <p>Math.random() * 6- - - - - 获取随机数0-1 * 6 - - - - -{{Math.random() * 6}}</p>
+        <h5>固定数值</h5>
+        <p>Math.PI- - - - - 圆周率 - - - - -{{Math.PI}}</p>
+        <p>Math.E- - - - - 自然对数的底数 - - - - -{{Math.E}}</p>
+        <h5>三角函数</h5>
+        <p>Math.sin(0)- - - - - 三角函数sin - - - - -{{Math.sin(0)}}</p>
+        <p>Math.cos(0)- - - - - 三角函数cos - - - - -{{Math.cos(0)}}</p>
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const App = {
+            data() {
+                return {
+                    counter: 100
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>

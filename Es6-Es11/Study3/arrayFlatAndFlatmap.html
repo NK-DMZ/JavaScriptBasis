@@ -1,29 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数组flat与flatMap方法</title>
 </head>
+
 <body>
+    <p>flat()不会修改原数组</p>
     <script>
         // flat 
         // 蒋多维数组转化为低维数组
-        const arr1 = [5,[99,[55,77]]];
+        const arr1 = [5, [99, [55, 77]]];
+        const arr2 = [5, [99, [55, 77]]];
+        console.log(`初始数组arr1:`);
+        console.log(arr1);
         let res1 = arr1.flat();
-        let res2 = arr1.flat(2);
+        console.log(`flat()的结果res1:`);
         console.log(res1);
+        console.log(`修改后的数组arr1:`);
+        console.log(arr1);
+        console.log(`初始数组arr2:`);
+        console.log(arr2);
+        let res2 = arr2.flat(2);
+        console.log(`flat(2)的结果res2:`);
         console.log(res2);
+        console.log(`修改后的数组arr2:`);
+        console.log(arr2);
+        let arr3 = [
+            [2, 4],
+            [3, 6],
+            [4, 8]
+        ]
+        let res3 = arr3.flat()
+        console.log(res3);
+
+        // 如果不管有多少层嵌套， 都要转成一维数组， 可以用Infinity关键字作为参数。
+        let arr4 = [
+            [1, [2, 2, [3, [4, [5, [6]]]]], 1]
+        ];
+        let res4 = arr4.flat(Infinity);
+        console.log(res4);
+
+        // 如果原数组有空位， flat() 方法会跳过空位。
+        let arr5 = [1, , 2, , 4, , 5]
+        let res5 = arr5.flat()
+        console.log(res5);
+
 
         // flatMap
         // 也是把多维数组转化为低维数组，用于map中
-        const arr2 = [5,9,8,65,24];
-        const res3 = arr2.map(item =>[item * 10]);
-        console.log(res3);
-        const res4 = arr2.flatMap(item =>[item * 10]);
-        console.log(res4);
+        // map处理数据后返回数组，flat将多维数组展开，flatMap等于flat+map
+        const arr11 = [5, 9, 8, 65, 24];
+        const res11 = arr11.map(item => [item * 10]);
+        console.log(res11);
+        const res12 = arr11.flatMap(item => [item * 10]);
+        console.log(res12);
 
+        const arr12 = [
+            6,
+            [99, 66, 77]
+        ];
+        const res13 = arr12.flatMap(item => [item * 10]);
+        console.log(res13);
+
+        let res14 = arr11.flatMap((x) => [x, x * 2, x / 2, x + 10])
+        console.log(res14);
+        let res15 = arr11.map((x) => [x, x * 2, x / 2, x + 10])
+        console.log(res15);
     </script>
 </body>
+
 </html>
